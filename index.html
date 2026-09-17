@@ -59,7 +59,8 @@ nav.solid{background:rgba(12,10,25,.72);border-bottom:1px solid var(--line)}
 .hero .sub{margin-top:18px;max-width:46ch;color:var(--mut);font-size:clamp(15px,1.6vw,18px);font-weight:300;opacity:0;animation:rise .9s ease 2.2s forwards}
 .hero .eyebrow{opacity:0;animation:rise .9s ease 1.85s forwards;margin-bottom:22px}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut);opacity:0;animation:rise 1s ease 2.6s forwards}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut);opacity:0;text-align:center;animation:scrollRise 1s ease 2.6s forwards}
+@keyframes scrollRise{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translateX(-50%)}}
 .scroll::after{content:"";display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--azure),transparent);animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 
@@ -152,7 +153,7 @@ footer{position:relative;text-align:center;padding:clamp(90px,14vh,160px) 0 70px
 .cta:hover{transform:translateY(-3px);box-shadow:0 22px 50px -16px rgba(18,143,205,.9)}
 .micro{margin-top:40px;color:var(--mut);font-size:12px;letter-spacing:.04em}
 .divider{height:1px;background:var(--line);max-width:1180px;margin:0 auto}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important} .sym .piece,.stage .piece,.sw,.reveal,.hero h1,.hero .sub,.hero .eyebrow,.scroll{opacity:1!important;transform:none!important} .flourish .ln{stroke-dashoffset:0!important} .lock .hwm,.lock .hps{opacity:1!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important} .sym .piece,.stage .piece,.sw,.reveal,.hero h1,.hero .sub,.hero .eyebrow{opacity:1!important;transform:none!important} .scroll{opacity:1!important;transform:translateX(-50%)!important} .flourish .ln{stroke-dashoffset:0!important} .lock .hwm,.lock .hps{opacity:1!important}}
 
 /* traced wordmark uses */
 .zh,.zs,.zp{display:block;width:auto}
