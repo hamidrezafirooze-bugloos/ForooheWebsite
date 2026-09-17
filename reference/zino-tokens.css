@@ -1,0 +1,21 @@
+:root{
+  /* Brand */
+  --zino-indigo:#2C3A94;
+  --zino-azure:#128FCD;
+  --zino-sky:#2AA0E0;
+  --zino-cyan:#14ADE6;
+  --zino-pale:#BBDEF4;
+  --zino-blue-field:#0054A6;
+  /* Neutrals */
+  --zino-navy-900:#0C0A1F;
+  --zino-navy-800:#110F26;   /* primary background */
+  --zino-navy-700:#0E1330;
+  --zino-navy-600:#1A1836;   /* cards */
+  --zino-white:#FFFFFF;
+  /* Gradients */
+  --zino-gradient:linear-gradient(135deg,#2C3A94 0%,#128FCD 100%);
+  --zino-gradient-symbol:linear-gradient(180deg,#2AA0E0 0%,#28419A 100%);
+  /* Type */
+  --zino-font:"Galano Grotesque","Poppins","Hanken Grotesk",system-ui,sans-serif;
+  --zino-tracking-tag:0.22em;
+}

@@ -1,0 +1,26 @@
+{
+  "color": {
+    "indigo": "#2C3A94",
+    "azure": "#128FCD",
+    "sky": "#2AA0E0",
+    "cyan": "#14ADE6",
+    "pale": "#BBDEF4",
+    "blueField": "#0054A6",
+    "navy900": "#0C0A1F",
+    "navy800": "#110F26",
+    "navy700": "#0E1330",
+    "navy600": "#1A1836",
+    "white": "#FFFFFF"
+  },
+  "gradient": {
+    "brand": ["#2C3A94", "#128FCD"],
+    "symbol": ["#2AA0E0", "#28419A"]
+  },
+  "font": {
+    "family": "Galano Grotesque",
+    "fallback": ["Poppins", "Hanken Grotesk", "system-ui", "sans-serif"],
+    "wordmarkWeight": "Bold",
+    "bodyWeight": "Regular",
+    "tagTracking": "0.22em"
+  }
+}
