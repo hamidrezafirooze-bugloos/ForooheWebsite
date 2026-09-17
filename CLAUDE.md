@@ -45,13 +45,13 @@ One HTML file. No framework, no build. Order inside:
 ### The symbol (important)
 The mark = **two blades, each doubled** (a main + an offset echo copy that creates depth). Each symbol instance is inline SVG in this shape:
 ```
-<g transform="translate(0,404) scale(0.1,-0.1)" style="isolation:isolate">
-  <g class="shape-a"><path .. a-echo (opacity .5) /><path .. a-main /></g>
-  <g class="shape-b"><path .. b-main (mix-blend-mode:multiply) /><path .. b-echo (opacity .5) /></g>
+<g transform="translate(0,404) scale(0.1,-0.1)">
+  <g class="shape-a"><path .. a-echo /><path .. a-main /></g>
+  <g class="shape-b"><path .. b-main /><path .. b-echo /></g>
 </g>
 ```
 - The `transform` is potrace's (the paths live in a flipped, 10× coordinate space). Don't "fix" it — gradients are tuned to it (`y1=1 y2=0`).
-- **Transparency/"glassy" look** (matches the source's Photoshop *Saturation* blend): echo copies use `opacity="0.5"`; the top blade (`b-main`) uses `mix-blend-mode:multiply`; the whole group is `isolation:isolate` so multiply blends **within** the mark, not against the page. If you add new symbol instances, keep these three things or the overlaps will look flat.
+- **Depth comes from color, not alpha.** This matches the master vector (`assets/symbol/zino-symbol.svg`) exactly: every path is fully opaque, painted in plain order, no `opacity`, no `mix-blend-mode`, no `isolation`. The echo reads as a distinct offset shape purely because its gradient (`g_A_echo`/`g_B_echo`) is a different, deliberately darker-or-lighter color pair than its main (`g_A_main`/`g_B_main`) — e.g. `g_B_echo` (`#14ADE6`→`#1085C6`) is *brighter* than `g_B_main` (`#37A6C6`→`#0F79BE`), which is what gives the bottom blade's echo its soft, glassy-looking edge without any real transparency. Do **not** reintroduce `opacity="0.5"` echoes or `mix-blend-mode:multiply` on `b-main` — that was tried and made the top blade's echo wash out and the bottom blade darken wherever it overlapped anything behind it; always diff new instances against `zino-symbol-3x.png`.
 - Gradients are per-instance `<linearGradient>` with a unique suffix (e.g. `g_A_main_hero`). Keep suffixes unique to avoid ID collisions.
 
 ### Hero animation ("2 + trace")
