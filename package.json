@@ -2,7 +2,7 @@
   "name": "zino-brand-showcase",
   "version": "1.0.0",
   "private": true,
-  "description": "Single-page brand showcase for Zino — patient support.",
+  "description": "Brand showcase for Zino patient support: two identity directions plus a chooser landing page.",
   "scripts": {
     "start": "serve .",
     "dev": "serve .",

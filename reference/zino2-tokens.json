@@ -1,0 +1,7 @@
+{
+  "color": { "blue":"#0072BC", "blue2":"#29ABE2", "cyan":"#7FD3F2",
+             "navy":"#131026", "navy2":"#0F0C22", "card":"#1C1838", "white":"#FFFFFF" },
+  "gradient": { "brand": ["#0072BC","#29ABE2"] },
+  "font": { "family":"Galano Grotesque", "fallback":["Poppins","Hanken Grotesk","system-ui","sans-serif"] },
+  "taglines": ["Your Health, Our Mission", "Support · Care · Thrive"]
+}

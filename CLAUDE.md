@@ -3,39 +3,55 @@
 Guidance for Claude Code (and any dev) working in this repo.
 
 ## What this is
-A single-page, **design-showcase** website for **Zino — patient support** (a patient-support app). It presents the brand identity: the animated symbol, concept, construction, logo system, color, typography, and a real app mockup. It is **not** the product marketing site (though it can evolve into one).
+A **design-showcase** site for **Zino — patient support** (a patient-support app), presenting **two independent identity directions** for the team to compare and pick from:
+- **`geometric.html`** — the original two-blade abstract mark (indigo/azure).
+- **`human.html`** — a sibling identity built around a human figure (single blue). Sibling project, own assets/tokens, kept visually familial but distinct on purpose — see its own conventions below.
 
-Everything derives from the client's original source files (PSD/PDF). Colors were **sampled** from the artwork and the typeface was **read from the PSD type layers** — so the values in this repo are authentic, not guessed.
+`index.html` is a lightweight **chooser landing page**: two big cards, one per direction, that's the entry point when the site is opened cold. Neither sub-site assumes the other exists at build time; they're linked only by plain `<a href>`s (`index.html` → `geometric.html`/`human.html`, and a "← Directions" pill in each sub-site's nav back to `index.html`). This is deliberate — the two are single-file, inline-everything sites with overlapping class names (`.hero`, `.card`, `.tag`, `.cta`, …) and different `:root` tokens, so they must stay separate documents rather than being merged into one DOM/stylesheet.
+
+Everything in `geometric.html` derives from the client's original source files (PSD/PDF). Colors were **sampled** from the artwork and the typeface was **read from the PSD type layers** — so the values in this repo are authentic, not guessed. `human.html` follows the same principle for its own source PSDs (see its notes below).
 
 ## Run it
 It's a static site, no build step.
 ```bash
 npx serve .            # or: python3 -m http.server 8000
 ```
-Open the served URL. (Opening `index.html` via file:// mostly works, but a server avoids any asset/CORS quirks.)
+Open the served URL and start at `index.html` (the chooser), or go straight to `geometric.html` / `human.html`. (file:// mostly works too, but a server avoids any asset/CORS quirks.)
 
 ## Project structure
 ```
-index.html                     ← the entire site (self-contained except assets below)
+index.html                     ← chooser landing page (two cards → geometric.html / human.html)
+geometric.html                 ← Direction One: the geometric two-blade identity (formerly index.html)
+human.html                     ← Direction Two: the human-figure identity (sibling project)
 assets/
-  symbol/                       ← vector logo (SVG)
+  symbol/                       ← vector logo (SVG) — geometric direction
     zino-symbol.svg             ← MASTER layered symbol (animation-ready ids)
     zino-shape-a.svg / -b.svg   ← individual blades
     zino-symbol-white.svg / -navy.svg
     zino-wordmark-stacked-raw.svg   ← traced "zi/no" (potrace output)
     zino-wordmark-horizontal-raw.svg← traced "zino" horizontal
     zino-patient-support-raw.svg    ← traced "patient support"
-  png/                          ← transparent PNG exports of the symbol (1x/2x/3x, shapes, mono)
-  pattern/                      ← seamless background pattern tile (SVG) + preview
-  mockups/                      ← zino-phone-splash.webp/.png (real device, bg removed)
+  png/                          ← transparent PNG exports of the symbol (1x/2x/3x, shapes, mono) — geometric
+  pattern/                      ← seamless background pattern tile (SVG) + preview — geometric
+  mockups/                      ← zino-phone-splash.webp/.png (real device, bg removed) — geometric
+  logo/                         ← zino2-*.webp/.png mark variants — human direction (see human.html notes)
 reference/
-  zino-brand-reference.md       ← colors, type, usage, file inventory
-  zino-tokens.css / .json       ← design tokens
-  zino-copy-and-prompts.md      ← landing copy + AI prompts for mockups/animation
+  zino-brand-reference.md       ← colors, type, usage, file inventory — geometric
+  zino-tokens.css / .json       ← design tokens — geometric
+  zino-copy-and-prompts.md      ← landing copy + AI prompts for mockups/animation — geometric
+  zino2-tokens.css / .json      ← design tokens — human direction
 CLAUDE.md / README.md
 ```
 
-## How `index.html` is built (architecture)
+## `human.html` (Direction Two — human figure identity)
+- Palette: Zino blue `#0072BC`, accent `#29ABE2`, cyan `#7FD3F2`; navy `#131026`/`#0F0C22`, cards `#1C1838`. Gradient `linear-gradient(120deg,#0072BC,#29ABE2)`.
+- Sections: `hero → concept → values (Support·Care·Thrive) → color → type → apps → footer`.
+- Hero "fill" animation: `.markstage` stacks `.mk-base` (full logo, figure dimmed) under `.mk-fig` (complete logo), revealed by an animated diagonal mask (`@property`-registered `--r1`/`--r2`, top-left→bottom-right). The figure and letters interleave in the artwork, so never swap in a "figure-only" cutout here — it reintroduces holes. Respects `prefers-reduced-motion` (shows the final logo, static).
+- Badges (apps section) use pre-colored variants: navy→`zino2-mark`, light→`zino2-mark-dark`, blue→`zino2-mark-white`. Edges are pre-eroded ~1px to kill the extraction halo; keep that if you regenerate them.
+- No em dashes in copy (client preference) — commas/colons only.
+- Currently raster (transparent WebP); a vector version of the figure/wordmark is still on the TODO list, same as the geometric site's traced wordmarks.
+
+## How `geometric.html` is built (architecture)
 One HTML file. No framework, no build. Order inside:
 1. `<head>`: Google Fonts (**Poppins** as the web stand-in for Galano Grotesque) + one big `<style>` block using CSS variables (see tokens below).
 2. Right after `<body>`: a hidden `<svg><defs>` that defines **reusable wordmark symbols** — `#wmS` (stacked zino), `#wmH` (horizontal zino), `#wmP` (patient support), plus `#footgrad` gradient. These are `<use>`d wherever the wordmark appears (nav, system cards, type specimen, footer). Paths inherit `fill` from the `<use>` (no fill on the symbol paths) so they can be colored solid or with a gradient.
@@ -74,6 +90,7 @@ Two blades assemble from opposite sides (`@keyframes inA/inB` on `.pieceA/.piece
 - Symbol decomposed to clean layered SVG; transparency/blend restored to match source.
 - Full traced typography (stacked + horizontal + patient support) used across nav, hero, system, type, footer.
 - Seamless pattern; color & type sections; real device mockup (bg removed) in Applications.
+- Second identity direction (`human.html`) added alongside this one, with `index.html` as a chooser landing page between the two.
 
 ## TODO / next ideas (open)
 - [ ] **Monogram "Z"**: the System → Monogram card still uses a Poppins "Z". Trace the stylized gradient **Z** from the source (`Zino_Logotype_05` monogram) and drop it in.

@@ -1,0 +1,12 @@
+:root{
+  /* Design 2 — human identity */
+  --zino2-blue:#0072BC;      /* primary */
+  --zino2-blue2:#29ABE2;     /* accent */
+  --zino2-cyan:#7FD3F2;
+  --zino2-navy:#131026;      /* canvas */
+  --zino2-navy2:#0F0C22;
+  --zino2-card:#1C1838;
+  --zino2-white:#FFFFFF;
+  --zino2-gradient:linear-gradient(120deg,#0072BC,#29ABE2);
+  --zino2-font:"Galano Grotesque","Poppins","Hanken Grotesk",system-ui,sans-serif;
+}
