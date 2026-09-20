@@ -4,5 +4,7 @@ deployment:
     - export DEPLOYPATH=/home/ooheir/public_html/zino/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -r index.html $DEPLOYPATH
+    - /bin/cp -r geometric.html $DEPLOYPATH
+    - /bin/cp -r human.html $DEPLOYPATH
     - /bin/rm -rf $DEPLOYPATH/assets
     - /bin/cp -r assets $DEPLOYPATH
