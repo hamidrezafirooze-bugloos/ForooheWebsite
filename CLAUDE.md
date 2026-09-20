@@ -11,6 +11,8 @@ A **design-showcase** site for **Zino — patient support** (a patient-support a
 
 Everything in `geometric.html` derives from the client's original source files (PSD/PDF). Colors were **sampled** from the artwork and the typeface was **read from the PSD type layers** — so the values in this repo are authentic, not guessed. `human.html` follows the same principle for its own source PSDs (see its notes below).
 
+This repo also carries `root-site/` (see its own section below) — the actual `foroohe.ir` domain-root landing page. It has nothing to do with the Zino identity work; it lives here only because this repo is what `.cpanel.yml` deploys from for this hosting account.
+
 ## Run it
 It's a static site, no build step.
 ```bash
@@ -23,6 +25,10 @@ Open the served URL and start at `index.html` (the chooser), or go straight to `
 index.html                     ← chooser landing page (two cards → geometric.html / human.html)
 geometric.html                 ← Direction One: the geometric two-blade identity (formerly index.html)
 human.html                     ← Direction Two: the human-figure identity (sibling project)
+root-site/                     ← unrelated: foroohe.ir's own domain-root page (see its section below)
+  index.html                    ← full-bleed looping logo animation (video)
+  logo-motion.mp4                ← the animation, provided by the studio, played as-is
+  logo-poster.jpg                ← settled last frame, used as the <video poster>
 assets/
   symbol/                       ← vector logo (SVG) — geometric direction
     zino-symbol.svg             ← MASTER layered symbol (animation-ready ids)
@@ -50,6 +56,9 @@ CLAUDE.md / README.md
 - Badges (apps section) use pre-colored variants: navy→`zino2-mark`, light→`zino2-mark-dark`, blue→`zino2-mark-white`. Edges are pre-eroded ~1px to kill the extraction halo; keep that if you regenerate them.
 - No em dashes in copy (client preference) — commas/colons only.
 - Currently raster (transparent WebP); a vector version of the figure/wordmark is still on the TODO list, same as the geometric site's traced wordmarks.
+
+## `root-site/` (unrelated: foroohe.ir's own domain root)
+Not part of the Zino work. This is the studio's own homepage: a single full-viewport `<video autoplay muted loop playsinline>` playing `logo-motion.mp4` (their logo intro, provided as-is, not re-encoded), with `logo-poster.jpg` (the settled last frame) as the poster for the moment before the video paints. Page background (`#e4e4e4`) matches the video's own background so there's no visible frame edge. `.cpanel.yml` copies these three files straight to `public_html/` (the account root), separate from the `zino/` deploy target. If the studio sends a replacement animation, just swap `logo-motion.mp4` and re-extract `logo-poster.jpg` from its last frame (`ffmpeg -ss <t> -i logo-motion.mp4 -frames:v 1 logo-poster.jpg`) — nothing else needs to change.
 
 ## How `geometric.html` is built (architecture)
 One HTML file. No framework, no build. Order inside:

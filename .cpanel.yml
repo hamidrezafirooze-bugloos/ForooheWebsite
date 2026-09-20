@@ -8,3 +8,7 @@ deployment:
     - /bin/cp -r human.html $DEPLOYPATH
     - /bin/rm -rf $DEPLOYPATH/assets
     - /bin/cp -r assets $DEPLOYPATH
+    - export ROOTPATH=/home/ooheir/public_html/
+    - /bin/cp -r root-site/index.html $ROOTPATH
+    - /bin/cp -r root-site/logo-motion.mp4 $ROOTPATH
+    - /bin/cp -r root-site/logo-poster.jpg $ROOTPATH
