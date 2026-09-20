@@ -26,9 +26,7 @@ index.html                     ← chooser landing page (two cards → geometric
 geometric.html                 ← Direction One: the geometric two-blade identity (formerly index.html)
 human.html                     ← Direction Two: the human-figure identity (sibling project)
 root-site/                     ← unrelated: foroohe.ir's own domain-root page (see its section below)
-  index.html                    ← full-bleed looping logo animation (video)
-  logo-motion.mp4                ← the animation, provided by the studio, played as-is
-  logo-poster.jpg                ← settled last frame, used as the <video poster>
+  index.html                    ← "Foroohe Design Studio" landing page, a self-contained bundled export from the studio (fonts/JS/logo animation inlined as base64, unpacked client-side)
 assets/
   symbol/                       ← vector logo (SVG) — geometric direction
     zino-symbol.svg             ← MASTER layered symbol (animation-ready ids)
@@ -58,7 +56,7 @@ CLAUDE.md / README.md
 - Currently raster (transparent WebP); a vector version of the figure/wordmark is still on the TODO list, same as the geometric site's traced wordmarks.
 
 ## `root-site/` (unrelated: foroohe.ir's own domain root)
-Not part of the Zino work. This is the studio's own homepage: a single full-viewport `<video autoplay muted loop playsinline>` playing `logo-motion.mp4` (their logo intro, provided as-is, not re-encoded), with `logo-poster.jpg` (the settled last frame) as the poster for the moment before the video paints. Page background (`#e4e4e4`) matches the video's own background so there's no visible frame edge. `.cpanel.yml` copies these three files straight to `public_html/` (the account root), separate from the `zino/` deploy target. If the studio sends a replacement animation, just swap `logo-motion.mp4` and re-extract `logo-poster.jpg` from its last frame (`ffmpeg -ss <t> -i logo-motion.mp4 -frames:v 1 logo-poster.jpg`) — nothing else needs to change.
+Not part of the Zino work. This is the studio's own homepage: `index.html` is a single self-contained "bundled" HTML export ("Logo Motion Landing") supplied directly by the studio — a nav (SINCE 2014 / WORK / STUDIO / CONTACT), an animated geometric monogram logo with an ink-brush draw-in effect, a headline ("Identities drawn line by line, for brands that intend to last."), two CTAs, and a footer with a "REPLAY MOTION" button. It's not hand-authored: fonts, JS (including a small React 18 UMD build) and the logo animation are inlined as base64 resource blobs and reconstructed into blob URLs on `DOMContentLoaded` (look for `__bundler/manifest` / `__bundler/ext_resources` script tags), with a `fetch()` fallback only if a resource isn't found locally. Treat it as an opaque artifact from the studio rather than something to hand-edit — if they send a replacement, just drop in the new exported HTML file wholesale. `.cpanel.yml` copies this file straight to `public_html/` (the account root), separate from the `zino/` deploy target. This replaced an earlier video-based version (`logo-motion.mp4` + `logo-poster.jpg` via `<video autoplay muted loop playsinline>`), which the studio asked to remove in favor of this design.
 
 ## How `geometric.html` is built (architecture)
 One HTML file. No framework, no build. Order inside:
